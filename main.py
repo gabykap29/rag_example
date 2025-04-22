@@ -24,7 +24,7 @@ Reglas:
 
 Para responder debes seguir lo siguente:
 
-Contexto: {context}
+Contexto: {contexto}
 Pregunta: {question}
 
 - No inventes, no agregues conocimiento externo.
@@ -97,7 +97,7 @@ def generate_response_stream(contexto, book_name):
 
     response_stream = chain.stream({
         "contexto": contexto,
-        "book_name":book_name,
+        "question": question,
     })
 
     return response_stream
@@ -148,7 +148,7 @@ question = st.text_input("Pregunta del usuario")
     
 
 if question != "":
-    st.chat_message("user").write(f"Título del libro: {question}")
+    st.chat_message("user").write(f"Pregunta del usuario: {question}")
     st.markdown("---")
 
     # 2. Recuperar contexto relevante (si existe)
@@ -160,6 +160,7 @@ if question != "":
     prompt = custom_template.format(
         book_name= book_name,
         contexto=contexto,
+        question= question,
     )
 
     # 4. Generar respuesta
